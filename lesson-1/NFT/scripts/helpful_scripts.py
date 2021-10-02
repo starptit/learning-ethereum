@@ -1,4 +1,5 @@
 from brownie import accounts, network, config, LinkToken, MockV3Aggregator, MockOracle, VRFCoordinatorMock, Contract
+from web3 import Web3
 
 LOCAL_BLOCKCHAIN_ENVIRONMENTS = ["hardhat", "development", "ganache", "mainnet-fork", "binance-fork", "matic-fork"]
 OPENSEA_URL = "https://testnets.opensea.io/assets/{}/{}"
@@ -30,8 +31,8 @@ def get_contract(contract_name):
     else:
         contract_address = config["networks"][network.show_active()][contract_name]
         contract = Contract.from_abi(
-            contract_type.name, contract_address, contract_type.abi
-        )
+                contract_type._name, contract_address, contract_type.abi
+            )
     return contract
 
 def deploy_mocks():
@@ -43,6 +44,17 @@ def deploy_mocks():
     print(f"Deploying Mock VRF Coordinator...")
     vrf_coordinator = VRFCoordinatorMock.deploy(link_token.address, {"from": account})
     print(f"VRFCoordinator deployed to {vrf_coordinator.address}")
+
+
+def fund_with_link(
+    contract_address, account=None, link_token=None, amount=Web3.toWei(1, "ether")
+):
+    account = account if account else get_account()
+    link_token = link_token if link_token else get_contract("link_token")
+    funding_tx = link_token.transfer(contract_address, amount, {"from": amount})
+    funding_tx.wait(1)
+    print(f"Funded {contract_address}")
+    return funding_tx
 
 # def get_contract(contract_name):
 #     """If you want to use this function, go to the brownie config and add a new entry for
