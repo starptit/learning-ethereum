@@ -51,7 +51,7 @@ def fund_with_link(
 ):
     account = account if account else get_account()
     link_token = link_token if link_token else get_contract("link_token")
-    funding_tx = link_token.transfer(contract_address, amount, {"from": amount})
+    funding_tx = link_token.transfer(contract_address, amount, {"from": account})
     funding_tx.wait(1)
     print(f"Funded {contract_address}")
     return funding_tx
