@@ -9,6 +9,10 @@ contract_to_mock = {
     "vrf_coordinator": VRFCoordinatorMock,
     "oracle": MockOracle,
 }
+BREED_MAPPING = {0: "PUG", 1: "SHIBA", 2: "ST_BERNARD"}
+
+def get_breed(breed_number):
+    return BREED_MAPPING[breed_number]
 
 def get_account(index=None, id=None):
     print(config["wallets"]["from_key"])
