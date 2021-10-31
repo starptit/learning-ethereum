@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "./ERC165.sol";
+import "./interfaces/IERC721.sol";
+
 /*
     Building out the minting function:
         a. nft point to an address
@@ -22,22 +25,7 @@ pragma solidity ^0.8.0;
         5. Require that the mint address isn't 0
         6. Require that the token has not already been minted
 */
-contract ERC721 {
-    event Transfer(
-        address indexed from,
-        address indexed to,
-        uint256 indexed tokenId
-    );
-<<<<<<< HEAD
-=======
-
-    event Approval(
-        address indexed owner,
-        address indexed approved,
-        uint256 indexed tokenId
-    );
-
->>>>>>> fb3facdf346ef637cc4de9963e9a92806e79b99c
+contract ERC721 is ERC165, IERC721 {
     // mapping in solidity creates a hash table of key pair values
 
     // Mapping from token id to the owner
@@ -46,12 +34,26 @@ contract ERC721 {
     // Mapping from owner to number of owned tokens
     mapping(address => uint256) private _ownedTokensCount;
 
-<<<<<<< HEAD
-=======
     // Mapping from token id to approved addresses
     mapping(uint256 => address) private _tokenApprovals;
 
->>>>>>> fb3facdf346ef637cc4de9963e9a92806e79b99c
+    // EXERCISE: 1. REGISTER THE INTERFACE FOR THE ERC721 so that it includes
+    // the following functions: balanceOf, ownerOf, transferFrom
+
+    // 2. REGISTER THE INTERFACE FOR THE ERC721Enumerable contract so that it includes
+    // totalSupply, tokenByIndex, tokenOfOwnerByIndex
+
+    // 3. REIGSTER THE INTERFACE FOR THE ERC721Metadata contract so that includes
+    constructor() {
+        _registerInterface(
+            bytes4(
+                keccak256("totalSupply(bytes4)") ^
+                    keccak256("tokenByIndex(bytes4)") ^
+                    keccak256("tokenOfOwnerByIndex(bytes4)")
+            )
+        );
+    }
+
     function _exists(uint256 tokenId) internal view returns (bool) {
         // setting the address of nft owner to check the mapping
         // of the address from tokenOwner at the tokenId
@@ -60,11 +62,7 @@ contract ERC721 {
         return owner != address(0);
     }
 
-<<<<<<< HEAD
-    function _mint(address to, uint256 tokenId) internal {
-=======
     function _mint(address to, uint256 tokenId) internal virtual {
->>>>>>> fb3facdf346ef637cc4de9963e9a92806e79b99c
         require(to != address(0), "ERC721: minting to the zero address");
         require(!_exists((tokenId)));
         // we aare adding a new address witha token if for minting
@@ -75,32 +73,16 @@ contract ERC721 {
         emit Transfer(address(0), to, tokenId);
     }
 
-    /// @notice Count all NFTs assigned to an owner
-    /// @dev NFTs assigned to the zero address are considered invalid, and this
-    ///  function throws for queries about the zero address.
-    /// @param _owner An address for whom to query the balance
-    /// @return The number of NFTs owned by `_owner`, possibly zero
-    function balanceOf(address _owner) external view returns (uint256) {
+    function balanceOf(address _owner) public view override returns (uint256) {
         require(_owner != address(0), "owner query for nonexistent token");
         return _ownedTokensCount[_owner];
     }
 
-    /// @notice Find the owner of an NFT
-    /// @dev NFTs assigned to zero address are considered invalid, and queries
-    ///  about them do throw.
-    /// @param _tokenId The identifier for an NFT
-    /// @return The address of the owner of the NFT
-<<<<<<< HEAD
-    function ownerOf(uint256 _tokenId) external view returns (address) {
-=======
-    function ownerOf(uint256 _tokenId) public view returns (address) {
->>>>>>> fb3facdf346ef637cc4de9963e9a92806e79b99c
+    function ownerOf(uint256 _tokenId) public view override returns (address) {
         address owner = _tokenOwner[_tokenId];
         require(owner != address(0), "owner query for non-existent token");
         return owner;
     }
-<<<<<<< HEAD
-=======
 
     function _transferFrom(
         address _from,
@@ -126,7 +108,7 @@ contract ERC721 {
         address _from,
         address _to,
         uint256 _tokenId
-    ) public {
+    ) public override {
         require(isApprovedOrOwner(msg.sender, _tokenId));
         _transferFrom(_from, _to, _tokenId);
     }
@@ -157,5 +139,4 @@ contract ERC721 {
         // return (spender == owner || getApproved(tokenId) == spender);
         return (spender == owner);
     }
->>>>>>> fb3facdf346ef637cc4de9963e9a92806e79b99c
 }
