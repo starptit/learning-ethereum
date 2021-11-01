@@ -47,7 +47,7 @@ module.exports = {
       network_id: "*", // Any network (default: none)
     },
     contracts_directory: "./contracts/",
-    contracts_build_directory: "./abis",
+    contracts_build_directory: "./abis/",
   },
 
   // // Set default mocha options here, use special reporters etc.
