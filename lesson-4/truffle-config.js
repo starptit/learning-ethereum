@@ -23,6 +23,10 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+var path = require('path');
+// module.exports = {
+//     contracts_build_directory: path.join(__dirname, /* your output dir */)
+// }
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -47,7 +51,7 @@ module.exports = {
       network_id: "*", // Any network (default: none)
     },
     contracts_directory: "./contracts/",
-    contracts_build_directory: "./abis/",
+    contracts_build_directory: path.join(__dirname, "/abis"),
   },
 
   // // Set default mocha options here, use special reporters etc.
