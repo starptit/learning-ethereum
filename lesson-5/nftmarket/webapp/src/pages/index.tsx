@@ -19,7 +19,7 @@ import TransferERC20 from "components/TransferERC20";
 import ReadNFTMarket from "components/ReadNFTMarket";
 // import ReadERC72
 
-const addressContract = "0x5fbdb2315678afecb367f032d93f642f64180aa3";
+const addressContract = "0xfEe9fd24F503309Ea61DAeb127eeFC36ac65f602";
 
 const Home: NextPage = () => {
   return (

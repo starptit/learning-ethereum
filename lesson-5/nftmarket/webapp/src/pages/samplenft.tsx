@@ -6,7 +6,7 @@ import ConnectMetamask from "components/ConnectMetaMask";
 import CardERC721 from "components/CardERC721";
 import { BigNumber } from "ethers";
 
-const nftAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3";
+const nftAddress = "0xfEe9fd24F503309Ea61DAeb127eeFC36ac65f602";
 const tokenId = BigNumber.from(1);
 const SampleNFTPage: NextPage = () => {
   return (

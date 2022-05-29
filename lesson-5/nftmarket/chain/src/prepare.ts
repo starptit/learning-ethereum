@@ -46,7 +46,7 @@ async function main() {
 
   const listingFee = await market.getListingFee();
   const auctionPrice = ethers.utils.parseUnits("1", "ether");
-
+  console.log("\n\n----\n\n");
   console.log("1. == mint 1-6 to account#0");
   for (let i = 1; i <= 6; i++) {
     await nft.mintTo(address0);

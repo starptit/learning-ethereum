@@ -13,6 +13,7 @@ contract NFTMarketplace is ReentrancyGuard {
     Counters.Counter private _itemSoldCounter;
 
     address payable public marketowner;
+    // this fee will go to market owner address
     uint256 public listingFee = 0.025 ether;
 
     enum State {
@@ -31,6 +32,7 @@ contract NFTMarketplace is ReentrancyGuard {
         State state;
     }
 
+    // store all items in mapping
     mapping(uint256 => MarketItem) private marketItems;
 
     event MarketItemCreated(
