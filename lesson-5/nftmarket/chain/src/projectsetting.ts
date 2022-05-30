@@ -1,2 +1,2 @@
-export const tokenAddress = "0x7c4a184128e17cB08aE28e365792067278ca3e2b";
-export const marketAddress = "0xF749C8d199F555299cd8555f5942E4b56466Ab7f";
+export const tokenAddress = "0xE57D3907702F84072EF95678E1A4d55658f34866";
+export const marketAddress = "0xb1E8900091EB939dC941a21A88c66839319B20EE";
