@@ -76,6 +76,8 @@ export default function ReadNFTMarket(props: Props) {
       library.getSigner()
     );
     const auctionPrice = ethers.utils.parseUnits("1", "ether");
+
+    console.error(market);
     market
       .createMarketSale(addressNFTContract, itemId, { value: auctionPrice })
       .catch("error", console.error);

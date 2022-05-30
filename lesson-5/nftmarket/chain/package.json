@@ -6,7 +6,8 @@
   "dependencies": {
     "@openzeppelin/contracts": "^4.6.0",
     "base-64": "^1.0.0",
-    "hardhat": "^2.9.4"
+    "hardhat": "^2.9.4",
+    "solc": "^0.8.14-fixed"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.0",
