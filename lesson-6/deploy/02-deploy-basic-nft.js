@@ -14,6 +14,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         ? 1
         : VERIFICATION_BLOCK_CONFIRMATIONS
 
+    log(deployer)
     log("----------------------------------------------------")
     const args = []
     const basicNft = await deploy("BasicNft", {
