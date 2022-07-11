@@ -72,6 +72,8 @@ contract NFTMarketplace is ReentrancyGuard {
      * @dev create a MarketItem for NFT sale on the marketplace.
      *
      * List an NFT.
+     * tạo: cần truyền vào địa chỉ token (BNB)
+     * khi mua: ERC20 (địa chỉ)
      */
     function createMarketItem(
         address nftContract,
